@@ -5,6 +5,9 @@ class ComparatorsController < ApplicationController
     @spotify_id = params[:spotify]
     @apple_id = params[:appleMusic]
     @apple_store_front = "us"
+
+    # ---------- API calls that would be used to get actual data--------
+
     # @spotify_response = RestClient::Request.execute(
     #   method: 'get',
     #   url:
@@ -18,17 +21,24 @@ class ComparatorsController < ApplicationController
     #   contentType: 'application/json',
     #   headers: {'Authorization': "Bearer #{apple_auth_token}"}
     # )
+
+    # --------------- sample data ---------------------
+
     count = 0
     if @spotify_id == "no_match" && @apple_id == "no_match"
       @apple_response = APPLE_NO_MATCH_SAMPLE_RESPONSE
     elsif @spotify_id == "match" && @apple_id == "match"
       @apple_response = APPLE_MATCHING_SAMPLE_RESPONSE
     end
+    @spotify_response = SPOTIFY_SAMPLE_RESPONSE
+
+    # ---------------------------------------------------
+
     @apple = @apple_response[:data][0][:relationships][:tracks][:data].map do |data|
       data[:attributes][:isrc]
     end
 
-    @spotify = SPOTIFY_SAMPLE_RESPONSE[:tracks][:items].map do |item|
+    @spotify = @spotify_response[:tracks][:items].map do |item|
       item[:track][:external_ids][:isrc]
     end
 
