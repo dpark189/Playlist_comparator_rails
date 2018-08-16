@@ -7,4 +7,3 @@
   * `rails db:create`
   * `rails s`
   * navigate to `localhost:3000`
-* ...
