@@ -7,7 +7,7 @@ class ComparatorsController < ApplicationController
     @apple_store_front = "us"
 
     # ---------- API calls that would be used to get actual data--------
-
+    # ********* No auth tokens are defined currently in this build
     # @spotify_response = RestClient::Request.execute(
     #   method: 'get',
     #   url:
